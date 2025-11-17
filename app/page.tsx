@@ -2,35 +2,18 @@
 
 import { useMemo, useState, type ReactNode } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import {
   ChevronLeft,
   ChevronRight,
-  Clock,
-  Mail,
-  Phone,
   MapPin,
-  Menu,
   Cake,
   Users,
   UtensilsCrossed,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { HeaderNav } from "@/components/HeaderNav";
+import { TopBar } from "@/components/TopBar";
 
 const heroImages = [
   "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&h=600&q=80",
@@ -125,14 +108,21 @@ const menuItems = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="relative isolate overflow-hidden bg-zinc-900">
+    <div className="min-h-screen bg-white">
+      {/* Header Section - Transparent */}
+      <div className="absolute top-0 left-0 right-0 z-50 bg-transparent">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
+          <TopBar variant="dark" />
+          <HeaderNav variant="dark" />
+        </div>
+      </div>
+
+      {/* Hero Section with Carousel */}
+      <div className="relative isolate overflow-hidden bg-zinc-900 pt-32 md:pt-40">
         <HeroCarousel />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/40" />
         <div className="relative z-10 flex w-full flex-col px-4 pb-24 pt-4 md:px-6 md:pb-20 md:pt-6 lg:px-10">
           <div className="mx-auto w-full max-w-7xl">
-            <TopBar />
-            <HeaderNav />
             <Hero />
           </div>
         </div>
@@ -142,94 +132,13 @@ export default function Home() {
       <AboutSection />
       <CateringServices />
       <ReservationSection />
+      <TestimonialsSection />
+      <Footer />
     </div>
   );
 }
 
-function TopBar() {
-  return (
-    <div className="hidden flex-col gap-2 border-b border-white/10 pb-4 text-xs uppercase tracking-widest text-white/70 md:flex md:flex-row md:items-center md:justify-between">
-      <div className="flex flex-wrap items-center gap-4">
-        <InfoChip icon={<Phone className="h-3 w-3" />}>+1 (235) 235-598</InfoChip>
-        <InfoChip icon={<Mail className="h-3 w-3" />}>hello@loomii.com</InfoChip>
-        <InfoChip icon={<MapPin className="h-3 w-3" />}>
-          427 Market Street, Nairobi
-        </InfoChip>
-      </div>
-      <div className="flex items-center gap-2 text-white/80">
-        <Clock className="h-4 w-4" />
-        Open hours - Monday - Sunday - 8:00 AM - 9:00 PM
-      </div>
-    </div>
-  );
-}
 
-function HeaderNav() {
-  const menuItems = ["Home", "About", "Menu", "Stories", "Contact"];
-
-  return (
-    <div className="flex w-full items-center justify-between border-b border-white/10 py-4 md:py-6">
-      <div className="flex items-center gap-3 md:gap-4">
-        <p className="text-lg font-bold tracking-wide text-white md:text-xl">
-          Loomii
-        </p>
-      </div>
-
-      {/* Desktop Navigation */}
-      <div className="hidden items-center gap-6 md:flex">
-        <NavigationMenu className="w-auto">
-          <NavigationMenuList>
-            {menuItems.map((item) => (
-              <NavigationMenuItem key={item}>
-                <NavigationMenuLink
-                  asChild
-                  className={`${navigationMenuTriggerStyle} bg-transparent px-0 text-base font-medium text-white opacity-80 hover:opacity-100`}
-                >
-                  <Link href="#">{item}</Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            ))}
-          </NavigationMenuList>
-        </NavigationMenu>
-        <Button size="lg">Book a table</Button>
-      </div>
-
-      {/* Mobile Menu */}
-      <Sheet>
-        <SheetTrigger asChild>
-          <button
-            className="inline-flex items-center gap-2 text-white transition hover:opacity-80 md:hidden"
-            aria-label="Open menu"
-          >
-            <Menu className="h-5 w-5" />
-            <span className="text-sm font-medium uppercase tracking-wide">MENU</span>
-          </button>
-        </SheetTrigger>
-        <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-          <SheetHeader>
-            <SheetTitle className="text-left">Menu</SheetTitle>
-          </SheetHeader>
-          <nav className="mt-8 flex flex-col gap-4">
-            {menuItems.map((item) => (
-              <Link
-                key={item}
-                href="#"
-                className="rounded-lg px-4 py-3 text-base font-medium text-white transition-colors hover:bg-white/10"
-              >
-                {item}
-              </Link>
-            ))}
-            <div className="mt-4">
-              <Button size="lg" className="w-full">
-                Book a table
-              </Button>
-            </div>
-          </nav>
-        </SheetContent>
-      </Sheet>
-    </div>
-  );
-}
 
 function HeroCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -386,20 +295,6 @@ function DishRow() {
   );
 }
 
-function InfoChip({
-  children,
-  icon,
-}: {
-  children: ReactNode;
-  icon?: ReactNode;
-}) {
-  return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-1 text-[11px] tracking-[0.2em] text-white/70">
-      {icon}
-      {children}
-    </span>
-  );
-}
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
@@ -800,5 +695,126 @@ function ReservationSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function TestimonialsSection() {
+  const testimonials = [
+    {
+      name: "Ian Boner",
+      role: "CUSTOMER",
+      text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&h=200&q=80",
+    },
+    {
+      name: "Jason McClean",
+      role: "CUSTOMER",
+      text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+      image:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&h=200&q=80",
+    },
+    {
+      name: "Mark Stevenson",
+      role: "CUSTOMER",
+      text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+      image:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&h=200&q=80",
+    },
+  ];
+
+  return (
+    <section className="bg-white py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
+        {/* Section Header */}
+        <div className="relative mb-12 text-center md:mb-16">
+          <h2 className="relative z-10 text-5xl font-bold text-zinc-800 md:text-6xl lg:text-7xl">
+            <span
+              className="absolute left-1/2 -top-8 -translate-x-1/2 text-6xl font-normal italic text-amber-600 md:-top-10 md:text-7xl lg:-top-12 lg:text-8xl"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              Testimony
+            </span>
+            <span className="block pt-12 md:pt-16 lg:pt-20">Happy Customer</span>
+          </h2>
+        </div>
+
+        {/* Testimonials Grid */}
+        <div className="grid gap-8 md:grid-cols-3">
+          {testimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center text-center"
+            >
+              {/* Profile Picture with Quote Icon */}
+              <div className="relative mb-6">
+                <div className="relative h-32 w-32 overflow-hidden rounded-full">
+                  <Image
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                {/* Quote Icon */}
+                <div className="absolute -bottom-2 -right-2 flex h-12 w-12 items-center justify-center rounded-lg bg-amber-600 text-2xl text-white shadow-lg">
+                  &ldquo;&rdquo;
+                </div>
+              </div>
+
+              {/* Testimonial Text */}
+              <p className="mb-6 text-base leading-relaxed text-zinc-600 md:text-lg">
+                {testimonial.text}
+              </p>
+
+              {/* Customer Name */}
+              <h3 className="mb-1 text-lg font-bold text-zinc-900 md:text-xl">
+                {testimonial.name}
+              </h3>
+
+              {/* Role */}
+              <p className="text-sm uppercase tracking-wider text-zinc-500">
+                {testimonial.role}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Pagination Dots */}
+        <div className="mt-12 flex justify-center gap-2">
+          {[1, 2, 3, 4, 5].map((dot, index) => (
+            <button
+              key={dot}
+              className={`h-2 w-2 rounded-full transition-colors ${
+                index === 0
+                  ? "bg-amber-600"
+                  : "bg-zinc-300 hover:bg-zinc-400"
+              }`}
+              aria-label={`Go to page ${dot}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="bg-zinc-900 py-12 text-white">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
+        <div className="flex flex-col items-center justify-center gap-4 text-center">
+          <div className="flex items-center gap-2">
+            <MapPin className="h-5 w-5 text-amber-600" />
+            <p className="text-base text-white/80 md:text-lg">
+              Ethiopia, Shashemene, 01 Bus Station
+            </p>
+          </div>
+          <p className="text-sm text-white/60">
+            © {new Date().getFullYear()} Loomii Restaurant. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
