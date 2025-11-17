@@ -7,6 +7,7 @@ import { ChevronDown, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeaderNav } from "@/components/HeaderNav";
 import { TopBar } from "@/components/TopBar";
+import { Footer } from "@/components/Footer";
 
 const categories = ["Breakfast", "Lunch", "Dinner", "Drinks", "Desserts", "Wine"];
 
@@ -275,6 +276,7 @@ export default function MenuPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

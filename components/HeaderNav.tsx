@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,14 +18,16 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { ReservationModal } from "@/components/ReservationModal";
 
 export function HeaderNav({ variant = "dark" }: { variant?: "dark" | "light" }) {
+  const [isReservationOpen, setIsReservationOpen] = useState(false);
+
   const menuItems = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/#about" },
+    { name: "About", href: "/about" },
     { name: "Menu", href: "/menu" },
-    { name: "Stories", href: "/#stories" },
-    { name: "Contact", href: "/#contact" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const isDark = variant === "dark";
@@ -55,7 +58,9 @@ export function HeaderNav({ variant = "dark" }: { variant?: "dark" | "light" }) 
             ))}
           </NavigationMenuList>
         </NavigationMenu>
-        <Button size="lg">Book a table</Button>
+        <Button size="lg" onClick={() => setIsReservationOpen(true)}>
+          Book a table
+        </Button>
       </div>
 
       {/* Mobile Menu */}
@@ -84,13 +89,16 @@ export function HeaderNav({ variant = "dark" }: { variant?: "dark" | "light" }) 
               </Link>
             ))}
             <div className="mt-4">
-              <Button size="lg" className="w-full">
+              <Button size="lg" className="w-full" onClick={() => setIsReservationOpen(true)}>
                 Book a table
               </Button>
             </div>
           </nav>
         </SheetContent>
       </Sheet>
+
+      {/* Reservation Modal */}
+      <ReservationModal open={isReservationOpen} onOpenChange={setIsReservationOpen} />
     </div>
   );
 }

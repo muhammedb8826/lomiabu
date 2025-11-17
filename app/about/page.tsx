@@ -1,327 +1,12 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
 import Image from "next/image";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Cake,
-  Users,
-  UtensilsCrossed,
-} from "lucide-react";
-
+import Link from "next/link";
+import { Home, Cake, Users, UtensilsCrossed } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeaderNav } from "@/components/HeaderNav";
 import { TopBar } from "@/components/TopBar";
 import { Footer } from "@/components/Footer";
-
-const heroImages = [
-  "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&h=600&q=80",
-  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&h=600&q=80",
-  "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=800&h=600&q=80",
-  "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=800&h=600&q=80",
-];
-
-const dishes = [
-  {
-    name: "Grilled Beef with Potatoes",
-    description: "Charred ribeye • Potato fondant • Berbere jus",
-    image:
-      "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=320&h=320&q=80",
-  },
-  {
-    name: "Coastal Prawns",
-    description: "Coconut tamarind glaze • Wild rice",
-    image:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=320&h=320&q=80",
-  },
-  {
-    name: "Heritage Grain Bowl",
-    description: "Teff • Roasted roots • Cucumber labneh",
-    image:
-      "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=320&h=320&q=80",
-  },
-  {
-    name: "Golden Crêpe",
-    description: "Cardamom cream • Spiced honey",
-    image:
-      "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=320&h=320&q=80",
-  },
-  {
-    name: "Smoked Lamb Shoulder",
-    description: "Rosemary smoke • Fermented chili • Citrus peel",
-    image:
-      "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=320&h=320&q=80",
-  },
-  {
-    name: "Sunset Cocktail",
-    description: "Passionfruit • Ginger • Sparkling honey",
-    image:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=320&h=320&q=80",
-  },
-];
-
-const menuItems = [
-  {
-    name: "Grilled Beef with Potatoes",
-    description: "Meat, Potatoes, Rice, Tomatoe",
-    price: "$29",
-    image:
-      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&h=400&q=80",
-  },
-  {
-    name: "Grilled Beef with Potatoes",
-    description: "Meat, Potatoes, Rice, Tomatoe",
-    price: "$29",
-    image:
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&h=400&q=80",
-  },
-  {
-    name: "Grilled Beef with Potatoes",
-    description: "Meat, Potatoes, Rice, Tomatoe",
-    price: "$29",
-    image:
-      "https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=600&h=400&q=80",
-  },
-  {
-    name: "Grilled Beef with Potatoes",
-    description: "Meat, Potatoes, Rice, Tomatoe",
-    price: "$29",
-    image:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&h=400&q=80",
-  },
-  {
-    name: "Grilled Beef with Potatoes",
-    description: "Meat, Potatoes, Rice, Tomatoe",
-    price: "$29",
-    image:
-      "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=600&h=400&q=80",
-  },
-  {
-    name: "Grilled Beef with Potatoes",
-    description: "Meat, Potatoes, Rice, Tomatoe",
-    price: "$29",
-    image:
-      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&h=400&q=80",
-  },
-];
-
-export default function Home() {
-  return (
-    <div className="min-h-screen bg-white">
-      {/* Header Section - Transparent */}
-      <div className="absolute top-0 left-0 right-0 z-50 bg-transparent">
-        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
-          <TopBar variant="dark" />
-          <HeaderNav variant="dark" />
-        </div>
-      </div>
-
-      {/* Hero Section with Carousel */}
-      <div className="relative isolate overflow-hidden bg-zinc-900 pt-32 md:pt-40">
-        <HeroCarousel />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/40" />
-        <div className="relative z-10 flex w-full flex-col px-4 pb-24 pt-4 md:px-6 md:pb-20 md:pt-6 lg:px-10">
-          <div className="mx-auto w-full max-w-7xl">
-            <Hero />
-          </div>
-        </div>
-      </div>
-      <DishRow />
-      <MenuSection />
-      <AboutSection />
-      <CateringServices />
-      <ReservationSection />
-      <TestimonialsSection />
-      <Footer />
-    </div>
-  );
-}
-
-
-
-function HeroCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const goPrev = () =>
-    setCurrentIndex((prev) => (prev === 0 ? heroImages.length - 1 : prev - 1));
-  const goNext = () =>
-    setCurrentIndex((prev) => (prev + 1) % heroImages.length);
-
-  return (
-    <div className="absolute inset-0">
-      <div className="relative h-full w-full">
-        {heroImages.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-700 ${
-              index === currentIndex ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={image}
-              alt={`Hero image ${index + 1}`}
-              fill
-              className="object-cover blur-sm md:blur-none"
-              priority={index === 0}
-            />
-          </div>
-        ))}
-      </div>
-      {/* Carousel navigation arrows - on sides for both mobile and desktop */}
-      <div className="absolute left-2 top-1/2 z-20 -translate-y-1/2 md:left-4">
-        <ArrowButton onClick={goPrev} icon={<ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />} />
-      </div>
-      <div className="absolute right-2 top-1/2 z-20 -translate-y-1/2 md:right-4">
-        <ArrowButton onClick={goNext} icon={<ChevronRight className="h-5 w-5 md:h-6 md:w-6" />} />
-      </div>
-    </div>
-  );
-}
-
-function Hero() {
-  return (
-    <div className="flex min-h-[calc(100vh-120px)] flex-col items-center justify-center text-center md:min-h-[calc(100vh-180px)] lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-12 lg:py-16 lg:text-left">
-      <div className="flex flex-col items-center lg:items-start">
-        <div className="relative mb-6 text-center lg:text-left">
-          <h1 className="relative z-10 text-5xl font-bold text-white md:text-6xl lg:text-7xl">
-            <span
-              className="absolute -left-2 -top-4 text-4xl font-normal italic text-amber-600/90 md:-left-6 md:-top-10 md:text-7xl lg:-left-8 lg:-top-12 lg:text-8xl"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              Best
-            </span>
-            <span className="block pt-8 md:pt-16 lg:pt-20">Loomii</span>
-            <span className="block">Restaurant</span>
-          </h1>
-        </div>
-        <p className="mt-6 max-w-xl px-4 text-base leading-relaxed text-white/80 md:mt-8 md:px-0 md:text-lg lg:mt-10">
-          A refined culinary story celebrating the spice routes linking East
-          Africa and the globe. Flame-kissed meats, seasonal vegetables, artisan
-          breads and sunset cocktails – now serving nightly tastings.
-        </p>
-
-        <div className="mt-8 flex flex-col gap-3 px-4 sm:flex-row sm:items-center md:mt-10 md:px-0 lg:justify-start">
-          <Button size="lg" className="bg-orange-500 hover:bg-orange-600">
-            Reserve a table
-          </Button>
-          <button className="text-base font-medium text-white underline-offset-4 hover:underline md:text-lg">
-            View tasting menu
-          </button>
-        </div>
-      </div>
-
-      <div className="hidden rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur lg:block">
-        <h3 className="text-xl font-semibold tracking-wide">Chef&apos;s Note</h3>
-        <p className="mt-4 text-white/80">
-          &ldquo;We&apos;re glazing heritage beef with tamarind caramel, charring coastal
-          prawns over coffee wood, and layering cardamom cream over sorghum
-          crêpes. We can&apos;t wait to plate this story for you.&rdquo;
-        </p>
-        <div className="mt-6 flex items-center gap-4">
-          <Image
-            src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=120&h=120&q=80"
-            alt="Chef portrait"
-            width={64}
-            height={64}
-            className="rounded-full border border-white/40 object-cover"
-          />
-          <div>
-            <p className="font-semibold">Chef Loomii</p>
-            <p className="text-sm text-white/60">Creative Director</p>
-          </div>
-        </div>
-        <div className="mt-8 grid grid-cols-2 gap-5 text-sm text-white/80">
-          <Stat label="Signature Plates" value="12+" />
-          <Stat label="Tasting Seats" value="28" />
-          <Stat label="Wine Pairings" value="6" />
-          <Stat label="Private Nights" value="4" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function DishRow() {
-  const [slide, setSlide] = useState(0);
-  const itemsPerView = 4;
-  const totalSlides = Math.ceil(dishes.length / itemsPerView);
-
-  const visibleDishes = useMemo(() => {
-    const startIndex = (slide * itemsPerView) % dishes.length;
-    return Array.from({ length: itemsPerView }, (_, idx) => {
-      const index = (startIndex + idx) % dishes.length;
-      return dishes[index];
-    });
-  }, [slide]);
-
-  const goPrev = () =>
-    setSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
-  const goNext = () => setSlide((prev) => (prev + 1) % totalSlides);
-
-  return (
-    <section className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-16 md:px-6 lg:px-10">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-semibold text-white">Chef’s tasting</h2>
-        <div className="flex gap-3">
-          <ArrowButton onClick={goPrev} icon={<ChevronLeft className="h-4 w-4" />} />
-          <ArrowButton onClick={goNext} icon={<ChevronRight className="h-4 w-4" />} />
-        </div>
-      </div>
-
-      <div className="relative">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {visibleDishes.map((dish) => (
-          <article
-            key={dish.name}
-            className="rounded-3xl bg-white/5 p-4 text-center text-white shadow-lg shadow-black/30 backdrop-blur"
-          >
-            <div className="mx-auto h-20 w-20 overflow-hidden rounded-full border border-white/30">
-              <Image
-                src={dish.image}
-                alt={dish.name}
-                width={80}
-                height={80}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <h3 className="mt-4 text-lg font-semibold">{dish.name}</h3>
-            <p className="mt-2 text-sm text-white/70">{dish.description}</p>
-          </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <p className="text-3xl font-semibold text-white">{value}</p>
-      <p className="text-xs uppercase tracking-[0.4em] text-white/60">{label}</p>
-    </div>
-  );
-}
-
-function ArrowButton({
-  onClick,
-  icon,
-}: {
-  onClick: () => void;
-  icon: ReactNode;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 p-3 text-white shadow-lg backdrop-blur-sm transition-all hover:bg-white/20 active:scale-95 md:p-4"
-      aria-label="carousel navigation"
-    >
-      {icon}
-    </button>
-  );
-}
 
 function AboutSection() {
   const stats = [
@@ -420,62 +105,6 @@ function AboutSection() {
   );
 }
 
-function MenuSection() {
-  return (
-    <section className="bg-white py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
-        {/* Section Header */}
-        <div className="relative mb-12 text-center md:mb-16">
-          <h2 className="relative z-10 text-5xl font-bold text-zinc-800 md:text-6xl lg:text-7xl">
-            <span
-              className="absolute left-1/2 -top-4 -translate-x-1/2 text-4xl font-normal italic text-amber-600 md:-top-10 md:text-7xl lg:-top-12 lg:text-8xl"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              Specialties
-            </span>
-            <span className="block pt-8 md:pt-16 lg:pt-20">Our Menu</span>
-          </h2>
-        </div>
-
-        {/* Menu Grid */}
-        <div className="grid gap-8 md:grid-cols-2">
-          {menuItems.map((item, index) => (
-            <div
-              key={index}
-              className="group overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-xl"
-            >
-              <div className="relative h-64 overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="mb-2 text-xl font-bold text-zinc-900 md:text-2xl">
-                  {item.name}
-                </h3>
-                <p className="mb-4 text-base text-zinc-600 md:text-lg">
-                  {item.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-zinc-900 md:text-3xl">
-                    {item.price}
-                  </span>
-                  <Button className="bg-amber-600 hover:bg-amber-700">
-                    Order now
-                  </Button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function CateringServices() {
   const services = [
     {
@@ -525,7 +154,7 @@ function CateringServices() {
               <div className="mb-6 text-amber-600">
                 {service.icon}
               </div>
-              <h3 className="mb-4 text-xl font-bold text-zinc-800 md:text-2xl">
+              <h3 className="mb-4 text-2xl font-bold text-zinc-900 md:text-3xl">
                 {service.title}
               </h3>
               <p className="text-base leading-relaxed text-zinc-600 md:text-lg">
@@ -682,19 +311,111 @@ function ReservationSection() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-amber-600 text-base hover:bg-amber-700 md:w-auto md:px-12"
+                  className="w-full bg-amber-600 text-white hover:bg-amber-700 md:w-auto"
                 >
-                  Make a Reservation
+                  Book Now
                 </Button>
               </div>
             </form>
           </div>
 
-          {/* Right Side - Visual Space (for food imagery background) */}
-          <div className="hidden lg:block" />
+          {/* Right Side - Info Card */}
+          <div className="flex flex-col gap-6">
+            <div className="rounded-lg bg-white/10 p-6 backdrop-blur-sm">
+              <h3 className="mb-4 text-2xl font-bold text-white">
+                Opening Hours
+              </h3>
+              <div className="space-y-3 text-white/90">
+                <div className="flex justify-between">
+                  <span>Monday - Friday</span>
+                  <span className="font-semibold">8:00 AM - 9:00 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Saturday</span>
+                  <span className="font-semibold">8:00 AM - 9:00 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Sunday</span>
+                  <span className="font-semibold">8:00 AM - 9:00 PM</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-lg bg-white/10 p-6 backdrop-blur-sm">
+              <h3 className="mb-4 text-2xl font-bold text-white">
+                Contact Info
+              </h3>
+              <div className="space-y-3 text-white/90">
+                <p>
+                  <span className="font-semibold">Phone:</span> +1 (235) 235-598
+                </p>
+                <p>
+                  <span className="font-semibold">Email:</span> hello@loomii.com
+                </p>
+                <p>
+                  <span className="font-semibold">Address:</span> Ethiopia,
+                  Shashemene, 01 Bus Station
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+export default function AboutPage() {
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden bg-zinc-900 pt-32 pb-16 md:pt-40 md:pb-24">
+        {/* Header Section - Transparent */}
+        <div className="absolute top-0 left-0 right-0 z-50 bg-transparent">
+          <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
+            <TopBar variant="dark" />
+            <HeaderNav variant="dark" />
+          </div>
+        </div>
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=2000&h=600&q=80"
+            alt="Chef cooking"
+            fill
+            className="object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-zinc-900/80" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 text-center md:px-6 lg:px-10">
+          <h1 className="mb-4 text-5xl font-bold text-white md:text-6xl lg:text-7xl">
+            About Us
+          </h1>
+          <nav className="flex items-center justify-center gap-2 text-sm text-white/70">
+            <Link href="/" className="flex items-center gap-1 hover:text-white">
+              <Home className="h-4 w-4" />
+              HOME
+            </Link>
+            <span>&gt;</span>
+            <span className="text-white">ABOUT</span>
+          </nav>
+        </div>
+      </div>
+
+      {/* About Section */}
+      <AboutSection />
+
+      {/* Services Section */}
+      <CateringServices />
+
+      {/* Booking Section */}
+      <ReservationSection />
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }
 
