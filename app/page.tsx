@@ -11,6 +11,9 @@ import {
   Phone,
   MapPin,
   Menu,
+  Cake,
+  Users,
+  UtensilsCrossed,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -75,6 +78,51 @@ const dishes = [
   },
 ];
 
+const menuItems = [
+  {
+    name: "Grilled Beef with Potatoes",
+    description: "Meat, Potatoes, Rice, Tomatoe",
+    price: "$29",
+    image:
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&h=400&q=80",
+  },
+  {
+    name: "Grilled Beef with Potatoes",
+    description: "Meat, Potatoes, Rice, Tomatoe",
+    price: "$29",
+    image:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&h=400&q=80",
+  },
+  {
+    name: "Grilled Beef with Potatoes",
+    description: "Meat, Potatoes, Rice, Tomatoe",
+    price: "$29",
+    image:
+      "https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=600&h=400&q=80",
+  },
+  {
+    name: "Grilled Beef with Potatoes",
+    description: "Meat, Potatoes, Rice, Tomatoe",
+    price: "$29",
+    image:
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&h=400&q=80",
+  },
+  {
+    name: "Grilled Beef with Potatoes",
+    description: "Meat, Potatoes, Rice, Tomatoe",
+    price: "$29",
+    image:
+      "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=600&h=400&q=80",
+  },
+  {
+    name: "Grilled Beef with Potatoes",
+    description: "Meat, Potatoes, Rice, Tomatoe",
+    price: "$29",
+    image:
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&h=400&q=80",
+  },
+];
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white">
@@ -90,7 +138,9 @@ export default function Home() {
         </div>
       </div>
       <DishRow />
+      <MenuSection />
       <AboutSection />
+      <CateringServices />
     </div>
   );
 }
@@ -223,12 +273,18 @@ function Hero() {
   return (
     <div className="flex min-h-[calc(100vh-120px)] flex-col items-center justify-center text-center md:min-h-[calc(100vh-180px)] lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-12 lg:py-16 lg:text-left">
       <div className="flex flex-col items-center lg:items-start">
-        <h1 className="text-6xl font-normal italic leading-none text-amber-600/90 sm:text-7xl md:text-8xl lg:text-9xl" style={{ fontFamily: 'var(--font-playfair)' }}>
-          Loomii
-        </h1>
-        <p className="mt-4 text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl md:text-5xl lg:mt-6 lg:text-6xl">
-          Best Restaurant
-        </p>
+        <div className="relative mb-6 text-center lg:text-left">
+          <h1 className="relative z-10 text-5xl font-bold text-white md:text-6xl lg:text-7xl">
+            <span
+              className="absolute -left-4 -top-8 text-6xl font-normal italic text-amber-600/90 md:-left-6 md:-top-10 md:text-7xl lg:-left-8 lg:-top-12 lg:text-8xl"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              Best
+            </span>
+            <span className="block pt-12 md:pt-16 lg:pt-20">Loomii</span>
+            <span className="block">Restaurant</span>
+          </h1>
+        </div>
         <p className="mt-6 max-w-xl px-4 text-base leading-relaxed text-white/80 md:mt-8 md:px-0 md:text-lg lg:mt-10">
           A refined culinary story celebrating the spice routes linking East
           Africa and the globe. Flame-kissed meats, seasonal vegetables, artisan
@@ -459,6 +515,125 @@ function AboutSection() {
               </p>
               <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-zinc-600 md:text-sm">
                 {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MenuSection() {
+  return (
+    <section className="bg-white py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
+        {/* Section Header */}
+        <div className="relative mb-12 text-left md:mb-16">
+          <h2 className="relative z-10 text-5xl font-bold text-zinc-800 md:text-6xl lg:text-7xl">
+            <span
+              className="absolute -left-4 -top-8 text-6xl font-normal italic text-amber-600 md:-left-6 md:-top-10 md:text-7xl lg:-left-8 lg:-top-12 lg:text-8xl"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              Specialties
+            </span>
+            <span className="block pt-12 md:pt-16 lg:pt-20">Our Menu</span>
+          </h2>
+        </div>
+
+        {/* Menu Grid */}
+        <div className="grid gap-8 md:grid-cols-2">
+          {menuItems.map((item, index) => (
+            <div
+              key={index}
+              className="group overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-xl"
+            >
+              <div className="relative h-64 overflow-hidden">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="mb-2 text-xl font-bold text-zinc-900 md:text-2xl">
+                  {item.name}
+                </h3>
+                <p className="mb-4 text-base text-zinc-600 md:text-lg">
+                  {item.description}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-zinc-900 md:text-3xl">
+                    {item.price}
+                  </span>
+                  <Button className="bg-amber-600 hover:bg-amber-700">
+                    Order now
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CateringServices() {
+  const services = [
+    {
+      icon: <Cake className="h-12 w-12 md:h-16 md:w-16" />,
+      title: "Birthday Party",
+      description:
+        "Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.",
+    },
+    {
+      icon: <Users className="h-12 w-12 md:h-16 md:w-16" />,
+      title: "Business Meetings",
+      description:
+        "Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.",
+    },
+    {
+      icon: <UtensilsCrossed className="h-12 w-12 md:h-16 md:w-16" />,
+      title: "Wedding Party",
+      description:
+        "Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.",
+    },
+  ];
+
+  return (
+    <section className="bg-zinc-50 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
+        {/* Section Header */}
+        <div className="relative mb-12 text-left md:mb-16">
+          <h2 className="relative z-10 text-5xl font-bold text-zinc-800 md:text-6xl lg:text-7xl">
+            <span
+              className="absolute -left-4 -top-8 text-6xl font-normal italic text-amber-600 md:-left-6 md:-top-10 md:text-7xl lg:-left-8 lg:-top-12 lg:text-8xl"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              Services
+            </span>
+            <span className="block pt-12 md:pt-16 lg:pt-20">Catering</span>
+            <span className="block">Services</span>
+          </h2>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid gap-8 md:grid-cols-3">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center text-center"
+            >
+              <div className="mb-6 text-amber-600">
+                {service.icon}
+              </div>
+              <h3 className="mb-4 text-xl font-bold text-zinc-800 md:text-2xl">
+                {service.title}
+              </h3>
+              <p className="text-base leading-relaxed text-zinc-600 md:text-lg">
+                {service.description}
               </p>
             </div>
           ))}
