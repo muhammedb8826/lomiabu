@@ -141,6 +141,7 @@ export default function Home() {
       <MenuSection />
       <AboutSection />
       <CateringServices />
+      <ReservationSection />
     </div>
   );
 }
@@ -637,6 +638,165 @@ function CateringServices() {
               </p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ReservationSection() {
+  return (
+    <section className="relative overflow-hidden bg-zinc-900 py-16 md:py-24">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=2000&h=1200&q=80"
+          alt="Grilled meat and ingredients"
+          fill
+          className="object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-zinc-900/70" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          {/* Form Section */}
+          <div className="rounded-2xl bg-white/95 p-8 shadow-2xl backdrop-blur-sm md:p-12">
+            {/* Section Header */}
+            <div className="relative mb-8">
+              <h2 className="relative z-10 text-5xl font-bold text-zinc-900 md:text-6xl">
+                <span
+                  className="absolute -left-4 -top-8 text-6xl font-normal italic text-amber-600 md:-left-6 md:-top-10 md:text-7xl"
+                  style={{ fontFamily: "var(--font-playfair)" }}
+                >
+                  Book a table
+                </span>
+                <span className="block pt-12 md:pt-16">Make Reservation</span>
+              </h2>
+            </div>
+
+            {/* Form */}
+            <form className="space-y-6">
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* Left Column */}
+                <div className="space-y-6">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="mb-2 block text-sm font-semibold text-zinc-900"
+                    >
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="Your Name"
+                      className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 placeholder:text-zinc-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600/20"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="mb-2 block text-sm font-semibold text-zinc-900"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="Phone"
+                      className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 placeholder:text-zinc-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600/20"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="time"
+                      className="mb-2 block text-sm font-semibold text-zinc-900"
+                    >
+                      Time
+                    </label>
+                    <input
+                      type="time"
+                      id="time"
+                      name="time"
+                      placeholder="Time"
+                      className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 placeholder:text-zinc-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600/20"
+                    />
+                  </div>
+                </div>
+
+                {/* Right Column */}
+                <div className="space-y-6">
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="mb-2 block text-sm font-semibold text-zinc-900"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Your Email"
+                      className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 placeholder:text-zinc-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600/20"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="date"
+                      className="mb-2 block text-sm font-semibold text-zinc-900"
+                    >
+                      Date
+                    </label>
+                    <input
+                      type="date"
+                      id="date"
+                      name="date"
+                      placeholder="Date"
+                      className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 placeholder:text-zinc-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600/20"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="person"
+                      className="mb-2 block text-sm font-semibold text-zinc-900"
+                    >
+                      Person
+                    </label>
+                    <select
+                      id="person"
+                      name="person"
+                      className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600/20"
+                    >
+                      <option value="">Person</option>
+                      <option value="1">1 Person</option>
+                      <option value="2">2 People</option>
+                      <option value="3">3 People</option>
+                      <option value="4">4 People</option>
+                      <option value="5">5+ People</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-4">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full bg-amber-600 text-base hover:bg-amber-700 md:w-auto md:px-12"
+                >
+                  Make a Reservation
+                </Button>
+              </div>
+            </form>
+          </div>
+
+          {/* Right Side - Visual Space (for food imagery background) */}
+          <div className="hidden lg:block" />
         </div>
       </div>
     </section>
