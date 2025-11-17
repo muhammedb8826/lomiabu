@@ -158,7 +158,7 @@ function HeroCarousel() {
               index === currentIndex ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image
+        <Image
               src={image}
               alt={`Hero image ${index + 1}`}
               fill
@@ -260,34 +260,60 @@ function DishRow() {
   const goNext = () => setSlide((prev) => (prev + 1) % totalSlides);
 
   return (
-    <section className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-16 md:px-6 lg:px-10">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-semibold text-white">Chef’s tasting</h2>
-        <div className="flex gap-3">
-          <ArrowButton onClick={goPrev} icon={<ChevronLeft className="h-4 w-4" />} />
-          <ArrowButton onClick={goNext} icon={<ChevronRight className="h-4 w-4" />} />
+    <section className="bg-white py-16 md:py-24">
+      <div className="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-10">
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="text-2xl font-semibold text-zinc-900 md:text-3xl">Chef&apos;s tasting</h2>
+          <div className="flex items-center gap-4">
+            <div className="flex gap-2">
+              {Array.from({ length: totalSlides }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSlide(index)}
+                  className={`h-2 w-2 rounded-full transition-colors ${
+                    slide === index ? "bg-amber-600" : "bg-zinc-300"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={goPrev}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 text-zinc-600 transition-colors hover:bg-zinc-100"
+                aria-label="Previous"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                onClick={goNext}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 text-zinc-600 transition-colors hover:bg-zinc-100"
+                aria-label="Next"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className="relative">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {visibleDishes.map((dish) => (
-          <article
-            key={dish.name}
-            className="rounded-3xl bg-white/5 p-4 text-center text-white shadow-lg shadow-black/30 backdrop-blur"
-          >
-            <div className="mx-auto h-20 w-20 overflow-hidden rounded-full border border-white/30">
-              <Image
-                src={dish.image}
-                alt={dish.name}
-                width={80}
-                height={80}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <h3 className="mt-4 text-lg font-semibold">{dish.name}</h3>
-            <p className="mt-2 text-sm text-white/70">{dish.description}</p>
-          </article>
+            <article
+              key={dish.name}
+              className="rounded-2xl bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg"
+            >
+              <div className="mx-auto mb-4 h-24 w-24 overflow-hidden rounded-full">
+                <Image
+                  src={dish.image}
+                  alt={dish.name}
+                  width={96}
+                  height={96}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-zinc-900">{dish.name}</h3>
+              <p className="text-sm text-zinc-600">{dish.description}</p>
+            </article>
           ))}
         </div>
       </div>
@@ -794,7 +820,7 @@ function TestimonialsSection() {
             />
           ))}
         </div>
-      </div>
+    </div>
     </section>
   );
 }
