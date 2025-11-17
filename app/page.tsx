@@ -90,6 +90,7 @@ export default function Home() {
         </div>
       </div>
       <DishRow />
+      <AboutSection />
     </div>
   );
 }
@@ -367,5 +368,102 @@ function ArrowButton({
     >
       {icon}
     </button>
+  );
+}
+
+function AboutSection() {
+  const stats = [
+    { number: "18", label: "YEARS OF EXPERIENCED" },
+    { number: "100", label: "MENUS/DISH" },
+    { number: "50", label: "STAFFS" },
+    { number: "15,000", label: "HAPPY CUSTOMERS" },
+  ];
+
+  return (
+    <section className="bg-white py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-10">
+        <div className="grid gap-8 lg:grid-cols-3">
+          {/* Left Column - Chef Portrait */}
+          <div className="relative h-[400px] overflow-hidden rounded-lg md:h-[500px] lg:h-[600px]">
+            <Image
+              src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&h=800&q=80"
+              alt="Chef portrait"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Middle Column - Two Stacked Images */}
+          <div className="flex flex-col gap-4">
+            <div className="relative h-[300px] overflow-hidden rounded-lg md:h-[350px]">
+              <Image
+                src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600&h=400&q=80"
+                alt="Chef cooking"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="relative h-[300px] overflow-hidden rounded-lg md:h-[350px]">
+              <Image
+                src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&h=400&q=80"
+                alt="Fresh ingredients"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Right Column - Text Content */}
+          <div className="flex flex-col justify-center lg:pl-8">
+            <div className="relative mb-6">
+              <h2 className="relative z-10 text-5xl font-bold text-zinc-900 md:text-6xl lg:text-7xl">
+                <span
+                  className="absolute -left-4 -top-8 text-6xl font-normal italic text-amber-600 md:-left-6 md:-top-10 md:text-7xl lg:-left-8 lg:-top-12 lg:text-8xl"
+                  style={{ fontFamily: "var(--font-playfair)" }}
+                >
+                  About
+                </span>
+                <span className="block pt-12 md:pt-16 lg:pt-20">Loomii</span>
+                <span className="block">Restaurant</span>
+              </h2>
+            </div>
+
+            <p className="mb-6 text-base leading-relaxed text-zinc-700 md:text-lg">
+              A paradisematic country, in which roasted parts of sentences fly
+              into your mouth. Even the all-powerful Pointing has no control
+              about the blind texts it is an almost unorthographic life One day
+              however a small line of blind text by the name of Lorem Ipsum
+              decided to leave for the far World of Grammar.
+            </p>
+
+            <div className="mb-8">
+              <p className="mb-2 text-lg font-bold text-zinc-900">
+                Mon - Fri 8 AM - 11 PM
+              </p>
+              <a
+                href="tel:+1235235598"
+                className="text-3xl font-bold text-amber-600 transition-colors hover:text-amber-700 md:text-4xl"
+              >
+                +1 (235) 235-598
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Statistics Section */}
+        <div className="mt-16 grid grid-cols-2 gap-8 border-t border-zinc-200 pt-12 md:grid-cols-4 md:gap-12">
+          {stats.map((stat, index) => (
+            <div key={index} className="text-center">
+              <p className="text-4xl font-bold text-amber-600 md:text-5xl lg:text-6xl">
+                {stat.number}
+              </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-zinc-600 md:text-sm">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
